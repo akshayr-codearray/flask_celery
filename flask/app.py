@@ -109,6 +109,11 @@ class One_User(Resource):
         except KeyError:
             return make_response({"message": "something went wrong"}, 400)
 
+class NewEnd(Resource):
+    def get(self):
+        return jsonify({"message":"new endpoint"})
+
+
 
 @celery.task()
 def post_user(user_id, name, email):
@@ -138,4 +143,5 @@ def put_user(u_id, email, name):
 
 api.add_resource(User, '/')
 api.add_resource(One_User, '/one/<int:u_id>')
+api.add_resource(NewEnd, '/new')
 
